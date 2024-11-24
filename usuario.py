@@ -1,8 +1,8 @@
 class Usuario:
-    def __init__(self, nome, senha, autenticado):
+    def __init__(self, nome, senha, autenticado=False):
         self.__nome = nome
         self.__senha = senha
-        self.__autenticado = False
+        self.__autenticado = autenticado
     
     def login(self):
         senha = input("Digite sua senha: ")
@@ -19,10 +19,13 @@ class Usuario:
         if senha_atual == self.__senha:
             nova_senha = input("Digite a nova senha: ")
             confirma_senha = input("Confirme a senha: ")
-            if confirma_senha == nova_senha:
+            if nova_senha != confirma_senha:
+                while(nova_senha != confirma_senha):
+                    print("As senhas digitadas não são iguais, tente novamente.")
+                    nova_senha = input("Digite a nova senha: ")
+                    confirma_senha = input("Confirme a senha: ")
+            else:
                 self.__senha = nova_senha
                 print("Senha alterada com sucesso!")
-            else:
-                print("As senhas digitadas não são iguais, tente novamente.")
         else:
-            print("A senha está incorreta!")
+            print("A senha está incorreta!") 
